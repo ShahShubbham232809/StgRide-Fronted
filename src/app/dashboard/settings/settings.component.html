@@ -1,0 +1,65 @@
+"<div class="card col-6 d-flex justify-content-center align-center mx-auto box stg">
+  <label class="label text-center mt-3">Ride Settings</label>
+  <form [formGroup]="createsettings" class="formBuild">
+    <div class="field">
+      <label class="label">Add Stop</label>
+      <div class="control">
+        <select name="Stop" id="Stop" formControlName="Stop" class="input" style="box-shadow: lightblue 0px 1px 4px;">
+          <option *ngFor="let stop of addstope" [value]="stop" class="bg-light">
+            {{stop}}</option>
+         </select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Ride TimeOut(sec)<i class="fas fa-clock"></i></label>
+      <div class="control">
+        <select name="Stop" id="Stop" formControlName="TimeOut" class="input" style="box-shadow: lightblue 0px 1px 4px;">
+          <option *ngFor="let time of ridetime" [value]="time" class="bg-light">
+            {{time}}</option>
+         </select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">NodeMailer Email <i class="fas fa-envelope"> </i></label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="NodemailerEmail" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Nodemailer Password <i class="fas fa-key"> </i></label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="NodemailerPassword" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Stripe SecreteKey<i class="fas fa-key"> </i></label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="StripeSecreteKey" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Stripe Publishable Key<i class="fas fa-key"></i> </label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="StripePublishableKey" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Twilio Accountid <i class="fas fa-envelope"></i></label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="TwilioAccountid" />
+      </div>
+    </div>
+    <div class="field mb-5">
+      <label class="label">Twilio AuthToken <i class="fas fa-key"></i> </label>
+      <div class="control">
+        <input class="input box" type="text" formControlName="TwilioAuthToken" />
+      </div>
+    </div>
+  </form>
+  <div class="field d-flex justify-content-around">
+    <button type="button" class="btn btn-success" (click)="AddSetting(this.createsettings.value)">
+      Update
+    </button>
+  </div>
+</div>
+"

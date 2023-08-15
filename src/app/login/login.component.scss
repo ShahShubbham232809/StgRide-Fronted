@@ -1,0 +1,72 @@
+.register{
+    color: black;
+    display: flex;
+    align-items: center;
+    margin:  50px auto;
+    justify-content: center;
+    flex-direction: column;
+    background-color: lightblue;
+    width: 50%;
+    opacity: 0.9;
+    border-radius: 20px;
+    padding: 20px;
+    border-bottom-left-radius: 35%;
+    border-top-right-radius: 35%;
+    box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5), 
+    inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+    border-left:8px solid darkcyan ;
+    border-right: 8px solid darkcyan;
+    border: 2px 2px 2px 2px 2px solid black;
+    .registername{
+        text-align: center;
+        margin-top: 30px;
+    }
+    input{
+        padding: 8px;
+        border: none;
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    }
+    input[type="submit"]{
+        padding: 10px;
+        width: 60%;
+        border-radius: 5px;
+        font-size: 15px;
+        opacity: 0.8;
+        font-weight: bold;
+        color:darkslateblue;
+        margin: 0 auto;
+    }    
+    input[type="file"]{
+        padding: 5px 20px;
+        width: 45%;
+        background-color: white;
+    }  
+    input:focus{
+        outline: none;
+    }
+    .registerform{
+        display: flex;
+        justify-content: space-around;
+        margin: 10px;
+        text-align: justify;
+        div{
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        label{
+            font-weight: bold;
+            font-size: 25px;
+            padding: 0 5px;
+            text-align: justify;
+        }
+    }
+
+}
+.body{
+    background-image: url('../../assets/bg5.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    padding: 122px;
+    // margin: 10px 0;   
+}

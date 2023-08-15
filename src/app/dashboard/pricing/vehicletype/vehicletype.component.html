@@ -1,0 +1,101 @@
+<div class="main row">
+  <div class="col-12">
+    <button
+      type="button"
+      class="btn btn-primary btn-rounded"
+      (click)="button()"
+    >
+      Add Vehicle
+    </button>
+  </div>
+  <div class="form p-3 m-2 col-11" *ngIf="value">
+    <div class="formvehicle card p-3">
+      <form
+        [formGroup]="createVehicle"
+        class="formBuild"
+        (submit)="AddCar(this.createVehicle.value)"
+      >
+        <input
+          type="file"
+          formControlName="profile"
+          (change)="inputProfile($event)"
+          accept="image/png, image/jpg, image/jpeg"
+        />
+        <div *ngIf="profileboolean" class="mx-auto">
+          <img
+            src="{{profileurl}}"
+            alt=""
+            style="height: 100px; width: 100px; margin: 0 auto;"
+          />
+        </div>
+        <div
+          class="field"
+          *ngIf="createVehicle.get('profile')?.invalid && (createVehicle.get('profile')?.dirty || createVehicle.get('profile')?.touched) "
+        >
+          <span *ngIf="createVehicle.get('profile')?.hasError('required')"
+            >Profile is required</span
+          >
+        </div>
+
+        <label for="type">Choice Type:</label>
+        <select name="carType" formControlName="cartype">
+          <option value="SUV" selected>SUV</option>
+          <option value="SEDAN">SEDAN</option>
+          <option value="EV">EV</option>
+          <option value="SportsCar">SportsCar</option>
+          <option value="HatchBack">HatchBack</option>
+          <option value="Lambo">Lambo</option>
+        </select>
+        <div
+          class="field"
+          *ngIf="createVehicle.get('cartype')?.invalid && (createVehicle.get('cartype')?.dirty || createVehicle.get('cartype')?.touched)"
+        >
+          <span *ngIf="createVehicle.get('cartype')?.hasError('required')"
+            >CarType is required</span
+          >
+          <span *ngIf="createVehicle.get('cartype')?.hasError('incorrect')"
+            >CarType is already exists</span
+          >
+        </div>
+        <p>
+          <button type="submit" class="btn btn-success btn-rounded" *ngIf="add">
+            Add
+          </button>
+          <button
+            type="button"
+            class="btn btn-success btn-rounded"
+            *ngIf="edit"
+            (click)="UpdateCar(this.createVehicle.value)"
+          >
+            Update
+          </button>
+          <button
+            type="reset"
+            class="btn btn-danger btn-rounded"
+            (click)="cancel()"
+          >
+            Cancel
+          </button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div class="carList col-12 pb-5">
+    <div class="carOne card p-3" *ngFor="let car of carsList">
+      <img src="http://127.0.0.1:5000/car/{{car.profile}}" alt="" />
+      <p>{{car.cartype| uppercase}}</p>
+      <p>
+        <button
+          type="button"
+          class="btn btn-success"
+          id="{{car._id}}"
+          (click)="EditCar($event.target)"
+        >
+          Update
+        </button>
+        <!-- <button type="button" class="btn btn-danger" id="{{car._id}}" (click)="deleteCar($event.target)">Delete</button> -->
+      </p>
+    </div>
+  </div>
+</div>

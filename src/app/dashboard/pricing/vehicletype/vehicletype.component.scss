@@ -1,0 +1,101 @@
+.main{
+    // margin: 5px;
+    display:flex ;
+    flex-direction: column;
+    // background-color: aquamarine;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    button{
+        padding: 10px 20px;
+        margin: 20px;
+        color: whitesmoke;
+        font-weight: bold;
+    }
+}
+.formvehicle{
+    display: flex;
+    // justify-content:center;
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+    background-image: url('../../../../assets/logo/—Pngtree—car\ color\ cool\ illustration\ background_2445485.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    // opacity: 0.3;
+}
+.formBuild{
+    opacity: 1 !important;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    color:white;
+        font-weight: bolder;
+    input,select,option,p{
+        width: 60%;
+        margin: 0 auto;
+        padding: 5px;
+        margin: 10px auto;
+        border: 1px solid white;
+        outline: 0;
+        border-radius: 10px;
+    }
+    label{
+        width: 60%;
+        margin: 0 auto;
+        margin: 10px auto;
+        // border: 1px solid white;
+        outline: 0;
+        
+    }
+
+    button{
+        width: 100px;
+        height: 40px;
+        font-weight: bolder;
+    }
+    p{
+        border: none;
+        display: flex;
+        justify-content: space-around;
+    }
+
+}
+.carList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px; 
+    img{
+        height: 250px;
+        width: 250px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+    p{
+        margin: 5px 0px;
+    }
+}
+.carOne{
+    margin: 20px;
+    text-align: center;
+}
+.toast-custom {
+
+    top: 150px;
+    
+    right: 0px;
+    
+    }
+
+    .field{
+        display: flex;
+        flex-direction: column;
+        color: blanchedalmond;
+        text-align: center;
+        font-weight: bolder;
+    }
+.pages{
+    padding: 0 auto;
+    justify-content: space-around !important;
+    width: 80%;
+    margin: 10px auto !important;
+}

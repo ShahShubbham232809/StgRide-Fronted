@@ -1,0 +1,847 @@
+<!-- <div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-2 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <span class="btn btn-secondary searchbtn"> Limit:</span>
+      </div>
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="onTableSizeChange($event)"
+          (change)="onTableDataChange2($event)"
+        >
+          <option value="2" selected>2</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <span class="btn btn-secondary searchbtn"> Sort By:</span>
+      </div>
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="sorting($event.target)"
+        >
+          <option value="asc">asc</option>
+          <option value="dasc">dscs</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 text-center">
+    <input
+      type="text"
+      name="search"
+      id="search"
+      #search
+      [(ngModel)]="inputValue"
+    />
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <button
+        class="btn btn-secondary py-2 searchbtn"
+        (click)="searchdriver(search.value)"
+      >
+        Search
+      </button>
+
+      <button class="btn btn-danger py-2 searchbtn" (click)="cancelsearch()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 mx-4 text-center">
+  <div class="d-flex justify-content-around align-center">
+    <div>
+      <span class="btn btn-secondary searchbtn"> Order By:</span>
+    </div>
+    <div>
+      <select
+        name="sort"
+        id="sort"
+        class="btn btn-secondary searchbtn"
+        (change)="ordering($event.target)"
+      >
+        <option value="name">Name</option>
+        <option value="email">Email</option>
+        <option value="number">number</option>
+      </select>
+    </div>
+  </div>
+</div> -->
+<div class="col-12 bt  text-right">
+  <button type="button" class="btn btn-primary btn-rounded" (click)="button()">
+    <i class="fa fa-plus"></i><i class="fa fa-user"></i>
+  </button>
+</div>
+
+<div class=" form p-3 m-2 col-11 " *ngIf="value">
+  <div class="formdriver card col-4 p-4">
+    <form [formGroup]="createDriver" class="formBuild" (submit)="Adddriver(this.createDriver.value)">
+      <div class="field">
+        <label class="label">Profile</label>
+        <div class="box p-1">
+          <input type="file" formControlName="profile" (change)="inputProfile($event)"
+            accept="image/png, image/jpg, image/jpeg" />
+        </div>
+        <div *ngIf="profileboolean" class="mx-auto">
+          <img src="{{profileurl}}" alt="" style="height: 100px; width: 100px; margin: 0 auto;" />
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g Alex Smith" formControlName="name"
+            onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" />
+        </div>
+      </div>
+      <div class="field"
+        *ngIf="createDriver.get('name')?.invalid && (createDriver.get('name')?.dirty || createDriver.get('name')?.touched) ">
+        <span *ngIf="createDriver.get('name')?.hasError('required')" style="color: red;">Name is required</span>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" formControlName="email" />
+        </div>
+      </div>
+      <div class="field"
+        *ngIf="createDriver.get('email')?.invalid && (createDriver.get('email')?.dirty || createDriver.get('email')?.touched) ">
+        <span *ngIf="createDriver.get('email')?.hasError('required')" style="color: red;">Email is required</span>
+        <span *ngIf="createDriver.get('email')?.hasError('pattern')" style="color: red;">It is Invalid Format</span>
+        <span *ngIf="createDriver.get('email')?.hasError('incorrect')" style="color: red;">It is already exists</span>
+      </div>
+
+      <div class="center">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Country</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control has-icons-left">
+                <span class="select">
+                  <select formControlName="countryid" (change)="selectedCountry($event)">
+                    <option *ngFor="let country of countryList" [value]="country.countryname" class="bg-light"
+                      [attr.country-id]="country._id">
+                      {{country.countryname | titlecase}}</option>
+                  </select>
+                </span>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field mt-3 text-center"
+        *ngIf="createDriver.get('countryid')?.invalid && (createDriver.get('countryid')?.dirty || createDriver.get('countryid')?.touched)">
+        <span *ngIf="createDriver.get('countryid')?.hasError('required')" style="color: red;">Please Select
+          Country...</span>
+        <!-- <span *ngIf="createcity.get('cityname')?.hasError('incorrect')">CarType is already exists</span> -->
+      </div>
+      <div class="field">
+        <label class="label">Number</label>
+        <div class="input-group">
+          <input type="text" class="form-control box w-25" aria-label="Text input with dropdown button"
+            formControlName="countrycode" readonly />
+          <input type="tel" class="form-control box w-75" aria-label="Text input with dropdown button"
+            formControlName="number" onkeypress="return /[0-9]/i.test(event.key)" maxlength="10" />
+        </div>
+      </div>
+      <div class="field" *ngIf="createDriver.get('countrycode')?.invalid && createDriver.get('countrycode')?.touched ">
+        <span *ngIf="createDriver.get('countrycode')?.hasError('required')" style="color: red;">Select Country
+          Code</span>
+      </div>
+      <div class="field"
+        *ngIf="createDriver.get('number')?.invalid && (createDriver.get('number')?.dirty || createDriver.get('number')?.touched) ">
+        <span *ngIf="createDriver.get('number')?.hasError('required')" style="color: red;">Number is required</span>
+        <span *ngIf="createDriver.get('number')?.hasError('pattern')" style="color: red;">It's length is 10</span>
+        <span *ngIf="createDriver.get('number')?.hasError('incorrect')" style="color: red;">It is already exits</span>
+      </div>
+
+      <div class="center">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">City</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control has-icons-left">
+                <span class="select">
+                  <select formControlName="cityid" (change)="Cityid($event)" class="city" style="max-width: 200px;">
+                    <option value="" selected disabled>Select City</option>
+                    <option *ngFor="let city of cityList" [value]="city.cityname" [attr.data-id]="city._id"
+                      class="bg-light">
+                      {{city.cityname}}</option>
+                  </select>
+                </span>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-flag"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field mt-3 text-center">
+        <span *ngIf="cityerror" style="color: red;">
+          No Found City...
+        </span>
+      </div>
+      <div class="field mt-3 text-center"
+        *ngIf="createDriver.get('cityid')?.invalid && (createDriver.get('cityid')?.dirty || createDriver.get('cityid')?.touched)">
+        <span *ngIf="createDriver.get('cityid')?.hasError('required')" style="color: red;">Please Select City...</span>
+      </div>
+      <div class="field d-flex justify-content-around" *ngIf="adddriver">
+        <button type="submit" class="btn btn-success">
+          Add
+        </button>
+        <button type="reset" class="btn btn-danger" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+      <div class="field d-flex justify-content-around" *ngIf="updatedriver">
+        <button type="button" class="btn btn-success" (click)="Updatedriver(this.createDriver.value)">
+          Update
+        </button>
+        <button type="reset" class="btn btn-danger" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <div *ngIf="addlist">
+  <div class="table row table-responsive">
+    <table class="table align-middle mb-0 bg-white text-center">
+      <thead class="bg-light">
+        <tr>
+          <th class="text-center">Profile</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Phone Number</th>
+          <th class="text-center">Country</th>
+          <th class="text-center">City</th>
+          <th class="text-center">Ride Status</th>
+          <th class="text-center">Assigned Approval</th>
+          <th class="text-center">Approval</th>
+          <th class="text-center">Assigned Service</th>
+          <th class="text-center">Assign Service</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="stg"
+          *ngFor="let driver of driverList  | paginate: {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          };
+    let i = index"
+        >
+          <td>
+            <div class="d-flex align-items-center justify-content-center">
+              <img
+                src="http://127.0.0.1:5000/driver/{{driver.profile}}"
+                alt=""
+                style="width: 45px; height: 45px;"
+                class="rounded-circle"
+              />
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{driver.name | titlecase}}</p>
+          </td>
+          <td>
+            <span class="d-inline">{{driver.email | titlecase}}</span>
+          </td>
+          <td>{{driver.countrycode + driver.number}}</td>
+          <td>{{driver.countryid.countryname | titlecase}}</td>
+          <td>{{driver.cityid.cityname | titlecase}}</td>
+          <td>{{driver.RideStatus}}</td>
+          <td>
+            {{driver.Status}}
+          </td>
+          <td>
+            <label class="switch">
+              <input
+                [attr.checked]="driver.Status == 'Approved' ? true : null"
+                type="checkbox"
+                id="{{driver._id}}"
+                class="toggleSwitch"
+                (change)="assignservice($event)"
+              />
+              <div class="slider">
+                <div class="circle">
+                  <svg
+                    class="cross"
+                    xml:space="preserve"
+                    style="enable-background: new 0 0 512 512;"
+                    viewBox="0 0 365.696 365.696"
+                    y="0"
+                    x="0"
+                    height="6"
+                    width="6"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        data-original="#000000"
+                        fill="currentColor"
+                        d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"
+                      ></path>
+                    </g>
+                  </svg>
+                  <svg
+                    class="checkmark"
+                    xml:space="preserve"
+                    style="enable-background: new 0 0 512 512;"
+                    viewBox="0 0 24 24"
+                    y="0"
+                    x="0"
+                    height="10"
+                    width="10"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        class=""
+                        data-original="#000000"
+                        fill="currentColor"
+                        d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </label>
+          </td>
+          <td *ngIf="driver.typeid != null">
+            {{driver.typeid.cartype | uppercase}}
+          </td>
+          <td *ngIf="driver.typeid == null">
+            Not Service Assigned
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info btn-rounded"
+              id="{{driver._id}}"
+              (click)="openDialog($event.target)"
+              style="margin: 0 auto;"
+            >
+              Assign
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-success btn-rounded"
+              id="{{driver._id}}"
+              (click)="Editdriver($event.target)"
+              style="margin: 0 auto;"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-rounded my-2 mx-1"
+              id="{{driver._id}}"
+              (click)="deletedriver($event.target)"
+              style="margin: 0 auto;"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center stg2 mb-5 pagination">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+
+<div *ngIf="searchlist">
+  <div class="table row">
+    <table class="table align-middle mb-0 bg-white text-center">
+      <thead class="bg-light">
+        <tr>
+          <th class="text-center">Profile</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Phone Number</th>
+          <th class="text-center">Country</th>
+          <th class="text-center">City</th>
+          <th class="text-center">Assigned Approval</th>
+          <th class="text-center">Approval</th>
+          <th class="text-center">Assigned Service</th>
+          <th class="text-center">Assign Service</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="stg"
+          *ngFor="let driver of SearchdriverList  | paginate: {
+            itemsPerPage: tableSize2,
+            currentPage: page2,
+            totalItems: count2
+          };
+    let i = index"
+        >
+          <td>
+            <div class="d-flex align-items-center justify-content-center">
+              <img
+                src="http://127.0.0.1:5000/driver/{{driver.profile}}"
+                alt=""
+                style="width: 45px; height: 45px;"
+                class="rounded-circle"
+              />
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{driver.name}}</p>
+          </td>
+          <td>
+            <span class="d-inline">{{driver.email}}</span>
+          </td>
+          <td>{{driver.countryid.countrycode+driver.number}}</td>
+          <td>{{driver.countryid.country}}</td>
+          <td>{{driver.cityid.cityname}}</td>
+          <td>
+            {{driver.Status}}
+          </td>
+          <td>
+            <label class="switch">
+              <input
+                [attr.checked]="driver.Status == 'Approved' ? true : null"
+                type="checkbox"
+                id="{{driver._id}}"
+                class="toggleSwitch"
+                (change)="assignservice($event)"
+              />
+              <div class="slider">
+                <div class="circle">
+                  <svg
+                    class="cross"
+                    xml:space="preserve"
+                    style="enable-background: new 0 0 512 512;"
+                    viewBox="0 0 365.696 365.696"
+                    y="0"
+                    x="0"
+                    height="6"
+                    width="6"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        data-original="#000000"
+                        fill="currentColor"
+                        d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"
+                      ></path>
+                    </g>
+                  </svg>
+                  <svg
+                    class="checkmark"
+                    xml:space="preserve"
+                    style="enable-background: new 0 0 512 512;"
+                    viewBox="0 0 24 24"
+                    y="0"
+                    x="0"
+                    height="10"
+                    width="10"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        class=""
+                        data-original="#000000"
+                        fill="currentColor"
+                        d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+                      ></path>
+                    </g>
+                    +
+                  </svg>
+                </div>
+              </div>
+            </label>
+          </td>
+          <td>
+            {{driver.typeid.cartype | uppercase}}
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info btn-rounded"
+              id="{{driver._id}}"
+              (click)="openDialog($event.target)"
+              style="margin: 0 auto;"
+            >
+              Assign
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-success btn-rounded"
+              id="{{driver._id}}"
+              (click)="Editdriver($event.target)"
+              style="margin: 0 auto;"
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-danger btn-rounded my-2 mx-1"
+              id="{{driver._id}}"
+              (click)="deletedriver($event.target)"
+              style="margin: 0 auto;"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange2($event)"
+    >
+    </pagination-controls>
+  </div>
+</div> -->
+
+<div class="container-fluid" style="margin-bottom: 100px;">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-2">
+            <h2>
+              <i class="fa fa-solid fa-taxi mx-2" style="color: #2199e8;"></i>Drivers <b>Details</b>
+            </h2>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto">
+            <select name="sort" id="sort" class="btn m-2 p-2 px-0 my-1" style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              " (change)="ordering($event.target)">
+              <option value="name">Name</option>
+              <option value="email">Email</option>
+              <option value="number">number</option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto">
+            <select name="sort" id="sort" class="btn m-2 p-2 px-0 my-1" style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              " (change)="sorting($event.target)">
+              <option value="asc">asc</option>
+              <option value="dasc">dscs</option>
+            </select>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-6 col-xxl-4 my-2">
+            <div class="search-box">
+              <i class="material-icons">&#xE8B6;</i>
+              <input type="text" class="form-control" placeholder="Search&hellip;" #search [(ngModel)]="inputValue"
+                />
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-1 my-2 text-center">
+            <button class="btn btn-secondary p-1 px-3 m-1" style="box-shadow: black 0px 1px 4px;"
+              (click)="searchdriver(search.value)">
+              <i class="fa fa-search" style="color: blue; padding: 0; margin: 0;"></i>
+            </button>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-1 my-2 text-center">
+            <button class="btn btn-secondary p-1 px-3 m-1" style="box-shadow: black 0px 1px 4px;"
+              (click)="cancelsearch()">
+              <i class="fa fa-close" style="color: blue; padding: 0; margin: 0;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <table class="table table-striped table-hover table-bordered" *ngIf="addlist">
+        <thead>
+          <tr>
+            <th class="text-center">Profile</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Country</th>
+            <th class="text-center">City</th>
+            <th class="text-center">Ride Status</th>
+            <th class="text-center">Assigned Approval</th>
+            <th class="text-center">Approval</th>
+            <th class="text-center">Assigned Service</th>
+            <th class="text-center">Assign Service</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stg" *ngFor="let driver of driverList  | paginate: {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          };
+    let i = index">
+            <td>
+              <div class="d-flex align-items-center justify-content-center">
+                <img src="http://127.0.0.1:5000/driver/{{driver.profile}}" alt="" style="width: 45px; height: 45px;"
+                  class="rounded-circle" />
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{driver.name | titlecase}}</p>
+            </td>
+            <td>
+              <span class="d-inline">{{driver.email | titlecase}}</span>
+            </td>
+            <td>{{driver.countryid.countrycode + driver.number}}</td>
+            <td>{{driver.countryid.countryname | titlecase}}</td>
+            <td>{{driver.cityid.cityname | titlecase}}</td>
+            <td>{{driver.RideStatus}}</td>
+            <td>
+              {{driver.Status}}
+            </td>
+            <td>
+              <label class="switch">
+                <input [attr.checked]="driver.Status == 'Approved' ? true : null" type="checkbox" id="{{driver._id}}"
+                  class="toggleSwitch" (change)="assignservice($event)" />
+                <div class="slider">
+                  <div class="circle">
+                    <svg class="cross" xml:space="preserve" style="enable-background: new 0 0 512 512;"
+                      viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path data-original="#000000" fill="currentColor"
+                          d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                        </path>
+                      </g>
+                    </svg>
+                    <svg class="checkmark" xml:space="preserve" style="enable-background: new 0 0 512 512;"
+                      viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      version="1.1" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path class="" data-original="#000000" fill="currentColor"
+                          d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                        </path>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </label>
+            </td>
+            <td *ngIf="driver.typeid != null">
+              {{driver.typeid.cartype | uppercase}}
+            </td>
+            <td *ngIf="driver.typeid == null">
+              Not Service Assigned
+            </td>
+            <td>
+              <button class="btn bg-light p-1 px-3 mx-auto" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="openDialog(driver._id)">
+                <mat-icon>motorcycle</mat-icon>
+              </button>
+            </td>
+            <td>
+
+              <button class="btn bg-light p-1 px-3" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="Editdriver(driver._id)">
+                <mat-icon>create</mat-icon>
+              </button>
+              <button class="btn bg-light p-1 px-3 my-2" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="deletedriver($event.target)">
+                <mat-icon>restore_from_trash</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="addlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+
+          Showing
+          <b>
+            <select name="sort" id="sort" class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;" (change)="onTableSizeChange($event)"
+              (change)="onTableDataChange($event)">
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b>
+          out of <b>{{count}}</b> entries
+        </div>
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+          </pagination-controls>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered" *ngIf="searchlist">
+        <thead>
+          <tr>
+            <th class="text-center">Profile</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Country</th>
+            <th class="text-center">City</th>
+            <th class="text-center">Assigned Approval</th>
+            <th class="text-center">Approval</th>
+            <th class="text-center">Assigned Service</th>
+            <th class="text-center">Assign Service</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stg" *ngFor="let driver of SearchdriverList  | paginate: {
+            itemsPerPage: tableSize2,
+            currentPage: page2,
+            totalItems: count2
+          };
+    let i = index">
+            <td>
+              <div class="d-flex align-items-center justify-content-center">
+                <img src="http://127.0.0.1:5000/driver/{{driver.profile}}" alt="" style="width: 45px; height: 45px;"
+                  class="rounded-circle" />
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{driver.name}}</p>
+            </td>
+            <td>
+              <span class="d-inline">{{driver.email}}</span>
+            </td>
+            <td>{{driver.countryid.countrycode+driver.number}}</td>
+            <td>{{driver.countryid.countryname | titlecase}}</td>
+            <td>{{driver.cityid.cityname | titlecase}}</td>
+            <td>
+              {{driver.Status}}
+            </td>
+            <td>
+              <label class="switch">
+                <input [attr.checked]="driver.Status == 'Approved' ? true : null" type="checkbox" id="{{driver._id}}"
+                  class="toggleSwitch" (change)="assignservice($event)" />
+                <div class="slider">
+                  <div class="circle">
+                    <svg class="cross" xml:space="preserve" style="enable-background: new 0 0 512 512;"
+                      viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path data-original="#000000" fill="currentColor"
+                          d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                        </path>
+                      </g>
+                    </svg>
+                    <svg class="checkmark" xml:space="preserve" style="enable-background: new 0 0 512 512;"
+                      viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      version="1.1" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path class="" data-original="#000000" fill="currentColor"
+                          d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                        </path>
+                      </g>
+                      +
+                    </svg>
+                  </div>
+                </div>
+              </label>
+            </td>
+            <td *ngIf="driver.typeid != null">
+              {{driver.typeid.cartype | uppercase}}
+            </td>
+            <td *ngIf="driver.typeid == null">
+              Not Service Assigned
+            </td>
+            <td>
+              <button class="btn bg-light p-1 px-3 mx-auto" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="openDialog(driver._id)">
+                <mat-icon>motorcycle</mat-icon>
+              </button>
+            </td>
+            <td>
+
+              <button class="btn bg-light p-1 px-3" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="Editdriver(driver._id)">
+                <mat-icon>create</mat-icon>
+              </button>
+              <button class="btn bg-light p-1 px-3 my-2" style="box-shadow: lightblue 0px 1px 4px;" id="{{driver._id}}"
+                (click)="deletedriver($event.target)">
+                <mat-icon>restore_from_trash</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="searchlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+          Showing
+          <b>
+            <select name="sort" id="sort" class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;" (change)="onTableSizeChange2($event)">
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b>
+          out of <b>{{count2}}</b> entries
+        </div>
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange2($event)">
+          </pagination-controls>
+        </div>
+      </div>
+      <div *ngIf="nodriver">
+        <p class="text-center">
+          No Driver Found
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

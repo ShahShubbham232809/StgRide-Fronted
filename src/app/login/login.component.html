@@ -1,0 +1,38 @@
+<div class="body">
+<div class="register">
+    <div class="registername">
+      <h1>Login</h1>
+    </div>
+    <div class="registerform">
+    <form [formGroup]="loginuser" (ngSubmit)="login(loginuser.value)">
+      <div><label for="email">Email</label>
+      <input type="email" id="email" formControlName="email"></div>
+      <div
+      class="field"
+      *ngIf="loginuser.get('email')?.invalid && (loginuser.get('email')?.dirty || loginuser.get('email')?.touched) "
+    >
+      <span
+        *ngIf="loginuser.get('email')?.hasError('required')"
+        style="color: red;"
+        >Email is required</span
+      >
+      <span
+        *ngIf="loginuser.get('email')?.hasError('pattern')"
+        style="color: red;"
+        >It is Invalid Format</span
+      >
+      <span
+        *ngIf="loginuser.get('email')?.hasError('incorrect')"
+        style="color: red;"
+        >It is already exists</span
+      >
+    </div>
+      <div><label for="pwd">Password</label>
+      <input type="password" id="pwd" formControlName="password"></div>
+      <div>
+        <input type="submit" value="Login">
+      </div>
+   </form>
+   </div>
+   </div>
+   </div>

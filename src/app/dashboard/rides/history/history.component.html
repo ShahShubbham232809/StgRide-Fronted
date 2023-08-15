@@ -1,0 +1,398 @@
+<!-- <div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="onTableSizeChange($event)"
+          (change)="onTableDataChange2($event)"
+        >
+          <option value="2" selected>2</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <span class="btn btn-secondary searchbtn"> Sort By:</span>
+      </div>
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="sorting($event.target)"
+        >
+          <option value="asc">asc</option>
+          <option value="dasc">dscs</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2 text-center"
+  >
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <span class="btn btn-secondary searchbtn"> Service By:</span>
+      </div>
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="ordering($event.target)"
+        >
+          <option value="number" disabled selected>Select Service</option>
+          <option
+          *ngFor="let car of carsList"
+          [value]="car.cartype"
+          class="bg-light"
+          [attr.country-id]="car._id"
+        >
+          {{car.cartype | uppercase}}</option
+        >
+
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-3 my-2  text-center"
+  >
+    <div class="d-flex justify-content-around align-center">
+      <div>
+        <span class="btn btn-secondary searchbtn"> Status By:</span>
+      </div>
+      <div>
+        <select
+          name="sort"
+          id="sort"
+          class="btn btn-secondary searchbtn"
+          (change)="ordering($event.target)"
+        >
+          <option value="All">All</option>
+          <option value="Cancelled">Cancelled</option>
+          <option value="Accepted">Accepted</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+  <div
+    class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-5 my-2 text-center"
+  >
+    <div class="d-flex justify-content-around align-center">
+      <div class="field d-flex my-2">
+        <label class="label mx-2 btn btn-secondary searchbtn">Date:</label>
+        <div>
+          <input
+            type="date"
+            id="date"
+            class="mx-2 px-4 py-2  stg"
+            style="border: 0;outline: 0;"
+            (input)="ByDate($event.target)"
+          />
+        </div>
+      </div>
+      <div class="field d-flex my-2">
+        <label class="label mx-2 btn btn-secondary searchbtn">Time:</label>
+        <div>
+          <input
+            type="time"
+            id="date"
+            class="mx-2 px-4 py-2  stg"
+            style="border: 0;outline: 0;"
+            (input)="ByTime($event.target)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 col-xxl-4 mx-auto">
+    <div class="d-flex justify-content-center">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        #search
+        [(ngModel)]="inputValue"
+      />
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-4 col-xl-6 col-xxl-3 my-2 text-center">
+    <div class="d-flex justify-content-around align-center">
+      <button
+        class="btn btn-secondary py-2 searchbtn"
+        (click)="searchdriver(search.value)"
+      >
+        Search
+      </button>
+      <button class="btn btn-danger py-2 searchbtn" (click)="cancelsearch()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div> -->
+<div class="container" style="margin-bottom: 100px;">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-2">
+            <h2>
+              <i class="fa fa-solid fa-history mx-2" style="color: #2199e8;"></i>Ride <b>History</b>
+            </h2>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto">
+            <select name="sort" id="status" class="btn m-2 p-2 px-0 my-1" style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              " value="Status">
+              <!-- <option selected disabled>Status</option> -->
+              <option value="All" selected>All</option>
+              <option value="3">Cancelled</option>
+              <option value="7">Completed</option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto">
+            <select name="sort" id="service" class="btn m-2 p-2 px-1 my-1" style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              ">
+              <option value="" selected>Service</option>
+              <option *ngFor="let car of carsList" [value]="car.cartype" class="bg-light" [attr.country-id]="car._id">
+                {{car.cartype | uppercase}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-4 col-xl-5 col-xxl-4 my-2 text-center">
+            From:
+            <input type="date" id="date" class="mx-2 py-1 px-2" style="
+                border: 0;
+                outline: 0;
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                border-radius: 10px;
+              " (input)="ByDate($event.target)" />
+            To:
+            <input type="date" id="date2" style="border: 0; outline: 0;" class="mx-2 py-1 px-2" style="
+                border: 0;
+                outline: 0;
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                border-radius: 10px;
+              " (input)="ByDate2($event.target)" />
+          </div>
+
+          <!-- </div> -->
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-6 col-xxl-4 my-2">
+            <button class="mx-1 bg-light px-3 py-1" style="
+                border: 0;
+                outline: 0;
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                border-radius: 10px;
+              " (click)="SearchbyFilter()">
+              Apply
+            </button>
+            <button class="mx-1 bg-light px-3 py-1" style="
+                border: 0;
+                outline: 0;
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                border-radius: 10px;
+              " (click)="clearSearch()">
+              Clear
+            </button>
+            <div class="search-box">
+              <i class="material-icons">&#xE8B6;</i>
+              <input type="text" class="form-control" placeholder="Search&hellip;" #search [(ngModel)]="inputValue"
+                 />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mx-0 text-center">
+          <button class="btn btn-secondary p-1 px-3 m-1 my-1" style="box-shadow: black 0px 1px 4px;"  (click)="searchdriver(search.value)">
+            <i class="fa fa-search" style="color: black; padding: 0; margin: 0; "></i>
+          </button>
+          <button class="btn btn-secondary p-1 px-3 m-1" (click)="download()">
+            <i class="fa fa-download" style="color: black; padding: 0; margin: 0;"></i>
+          </button>
+        </div>
+      </div>
+
+      <table class="table table-striped table-hover table-bordered" *ngIf="addlist">
+        <thead>
+          <tr>
+            <th class="text-center">User Name</th>
+            <!-- <th class="text-center">Driver Name</th> -->
+            <th class="text-center">Start Location</th>
+            <th class="text-center">Drop Location</th>
+            <th class="text-center">PickUp Date and Time</th>
+            <th class="text-center">Total Distance</th>
+            <th class="text-center">Total Time</th>
+            <th class="text-center">Servicetype</th>
+            <th class="text-center">Estimated Fare</th>
+            <th class="text-center">Payment Option</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stg" *ngFor="let ride of ridelist  | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index">
+            <td>
+              {{ride.userId.name | titlecase}}
+            </td>
+            <!-- <td>
+              <p class="fw-normal mb-1">{{ride.driverID.name | titlecase}}</p>
+            </td> -->
+            <td>{{ride.startLocation}}</td>
+            <td>{{ride.endLocation}}</td>
+            <td>{{ride.rideDate | date}} {{ride.rideTime}}</td>
+            <td>{{ride.totalDistance}}Kms</td>
+            <td>{{ convertToHoursAndMinutes(ride.totalTime)}}</td>
+            <td>
+              {{ride.serviceType | uppercase}}
+            </td>
+            <td>{{ride.estimateFare | currency:'INR'}}</td>
+            <td>{{ride.paymentOption}}</td>
+            <td *ngIf="ride.Status == 3">
+              <span class="badge badge-danger badge-pill" style="font-size: 14px;">Cancelled
+              </span>
+            </td>
+            <td *ngIf="ride.Status == 7">
+              <span class="badge badge-success badge-pill" style="font-size: 14px;">Completed
+              </span>
+            </td>
+            <td>
+              <button class="btn bg-light p-1 px-3" style="box-shadow: lightblue 0px 1px 4px;" id="{{ride._id}}"
+                (click)="openDialog(ride._id)">
+                <i class="fa fa-info" style="color: black; padding: 0; margin: 0; font-size: 12px;"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="addlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+          Showing
+          <b>
+            <select name="sort" id="sort" class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;" (change)="onTableSizeChange($event)"
+              (change)="onTableDataChange($event)">
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b>
+          out of <b>{{count}}</b> entries
+        </div>
+
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+          </pagination-controls>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered" *ngIf="searchlist">
+        <thead>
+          <tr>
+            <th class="text-center">User Name</th>
+            <!-- <th class="text-center">Driver Name</th> -->
+            <th class="text-center">Start Location</th>
+            <th class="text-center">Drop Location</th>
+            <th class="text-center">PickUp Date and Time</th>
+            <th class="text-center">Total Distance</th>
+            <th class="text-center">Total Time</th>
+            <th class="text-center">Servicetype</th>
+            <th class="text-center">Estimated Fare</th>
+            <th class="text-center">Payment Option</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stg" *ngFor="let ride of searchridelist  | paginate: {
+              itemsPerPage: tableSize2,
+              currentPage: page2,
+              totalItems: count2
+            };
+      let i = index">
+            <td>
+              {{ride.userId.name | titlecase}}
+            </td>
+            <!-- <td>
+              <p class="fw-normal mb-1">{{ride.driverID.name | titlecase}}</p>
+            </td> -->
+            <td>{{ride.startLocation}}</td>
+            <td>{{ride.endLocation}}</td>
+            <td>{{ride.rideDate | date}} {{ride.rideTime}}</td>
+            <td>{{ride.totalDistance}}Kms</td>
+            <td>{{ convertToHoursAndMinutes(ride.totalTime)}}</td>
+            <td>
+              {{ride.serviceType | uppercase}}
+            </td>
+            <td>{{ride.estimateFare | currency:'INR'}}</td>
+            <td>{{ride.paymentOption}}</td>
+            <td *ngIf="ride.Status == 3">
+              <span class="badge badge-danger badge-pill" style="font-size: 14px;">Cancelled
+              </span>
+            </td>
+            <td *ngIf="ride.Status == 7">
+              <span class="badge badge-success badge-pill" style="font-size: 14px;">Completed
+              </span>
+            </td>
+            <td>
+              <button class="btn bg-light p-1 px-3" style="box-shadow: lightblue 0px 1px 4px;" id="{{ride._id}}"
+                (click)="openDialog(ride._id)">
+                <i class="fa fa-info" style="color: black; padding: 0; margin: 0; font-size: 12px;"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="searchlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+          Showing
+          <b>
+            <select name="sort" id="sort" class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;" (change)="onTableSizeChange2($event)">
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b>
+          out of <b>{{count2}}</b> entries
+        </div>
+
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange2($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="nodriver">
+  <p class="text-center">
+    No Rides Found
+  </p>
+</div>

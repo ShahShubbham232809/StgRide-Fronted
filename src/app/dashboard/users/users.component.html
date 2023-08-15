@@ -1,0 +1,498 @@
+<div class="col-12 bt">
+  <button type="button" class="btn btn-primary btn-rounded" (click)="button()">
+    Add User
+  </button>
+</div>
+<div class="form p-3 m-2 col-11" *ngIf="value">
+  <div class="formuser card col-4 p-4">
+    <form
+      [formGroup]="createUser"
+      class="formBuild"
+      (submit)="AddUser(this.createUser.value)"
+    >
+      <div class="field">
+        <label class="label">Profile</label>
+        <div class="box p-1">
+          <input
+            type="file"
+            formControlName="profile"
+            (change)="inputProfile($event)"
+            accept="image/png, image/jpg, image/jpeg"
+          />
+        </div>
+        <div *ngIf="profileboolean" class="mx-auto">
+          <img
+            src="{{profileurl}}"
+            alt=""
+            style="height: 100px; width: 100px; margin: 0 auto;"
+          />
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input
+            class="input box"
+            type="text"
+            placeholder="e.g Alex Smith"
+            formControlName="name"
+            onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+          />
+        </div>
+      </div>
+      <div
+        class="field"
+        *ngIf="createUser.get('name')?.invalid && (createUser.get('name')?.dirty || createUser.get('name')?.touched) "
+      >
+        <span
+          *ngIf="createUser.get('name')?.hasError('required')"
+          style="color: red;"
+          >Name is required</span
+        >
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input
+            class="input box"
+            type="email"
+            placeholder="e.g. alexsmith@gmail.com"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <div
+        class="field"
+        *ngIf="createUser.get('email')?.invalid && (createUser.get('email')?.dirty || createUser.get('email')?.touched) "
+      >
+        <span
+          *ngIf="createUser.get('email')?.hasError('required')"
+          style="color: red;"
+          >Email is required</span
+        >
+        <span
+          *ngIf="createUser.get('email')?.hasError('incorrect')"
+          style="color: red;"
+          >It is already exists</span
+        >
+        <span
+          *ngIf="createUser.get('email')?.hasError('pattern')"
+          style="color: red;"
+          >It is Invalid Format</span
+        >
+      </div>
+      <div class="field">
+        <label for="country" class="label">Country :</label>
+        <p class="control has-icons-left">
+          <span class="select">
+            <select
+              class="shadow"
+              (change)="selectedCountry($event)"
+              formControlName="countryname"
+            >
+              <option
+                *ngFor="let country of countrycodelist"
+                [value]="country.countryname"
+                class="bg-light"
+                [attr.country-id]="country._id"
+              >
+                {{country.countryname | titlecase}}</option
+              >
+            </select>
+          </span>
+          <span class="icon is-small is-left">
+            <i class="fas fa-globe"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Country Code</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control box w-25 m-1"
+            aria-label="Text input with dropdown button"
+            formControlName="countrycode"
+            readonly
+          />
+          <input
+            type="tel"
+            class="form-control box w-75 m-1"
+            aria-label="Text input with dropdown button"
+            formControlName="number"
+            onkeypress="return /[0-9]/i.test(event.key)"
+            maxlength="10"
+          />
+        </div>
+      </div>
+      <div
+        class="field"
+        *ngIf="createUser.get('countryname')?.invalid && createUser.get('countryname')?.touched "
+      >
+        <span
+          *ngIf="createUser.get('countryname')?.hasError('required')"
+          style="color: red;"
+          >Select Country.......</span
+        >
+      </div>
+      <div
+        class="field"
+        *ngIf="createUser.get('number')?.invalid && (createUser.get('number')?.dirty || createUser.get('number')?.touched) "
+      >
+        <span
+          *ngIf="createUser.get('number')?.hasError('required')"
+          style="color: red;"
+          >Number is required</span
+        >
+        <span
+          *ngIf="createUser.get('number')?.hasError('pattern')"
+          style="color: red;"
+          >It's length is 10</span
+        >
+        <span
+          *ngIf="createUser.get('number')?.hasError('incorrect')"
+          style="color: red;"
+          >It is already exits</span
+        >
+      </div>
+      <div class="field d-flex justify-content-between" *ngIf="adduser">
+        <button
+          type="submit"
+          class="btn btn-success px-4"
+        >
+          Add
+        </button>
+        <button type="reset" class="btn btn-danger" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+      <div class="field d-flex justify-content-around" *ngIf="updateuser">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="UpdateUser(this.createUser.value)"
+        >
+          Update
+        </button>
+        <button type="reset" class="btn btn-danger" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-bottom: 100px;">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-2">
+            <h2>Users <b>Details</b></h2>
+          </div>
+          <div
+            class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto"
+          >
+            <select
+              name="sort"
+              id="sort"
+              class="btn m-2 p-2 px-0 my-1"
+              style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              "
+              (change)="ordering($event.target)"
+            >
+              <option value="name">Name</option>
+              <option value="email">Email</option>
+              <option value="number">number</option>
+            </select>
+          </div>
+          <div
+            class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-1 text-center mx-auto"
+          >
+            <select
+              name="sort"
+              id="sort"
+              class="btn m-2 p-2 px-0 my-1"
+              style="
+                box-shadow: lightblue 0px 1px 4px;
+                padding: 0;
+                margin: 0;
+                border-radius: 10px;
+              "
+              (change)="sorting($event.target)"
+            >
+              <option value="asc">asc</option>
+              <option value="dasc">dscs</option>
+            </select>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-6 col-xxl-4 my-2">
+            <div class="search-box">
+              <i class="material-icons">&#xE8B6;</i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search&hellip;"
+                #search
+                [(ngModel)]="inputValue"
+              />
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-1 my-2 text-center">
+            <button class="btn btn-secondary p-1 px-3 m-1" style="box-shadow: black 0px 1px 4px;"
+              (click)="searchuser(search.value)">
+              <i class="fa fa-search" style="color: blue; padding: 0; margin: 0;"></i>
+            </button>
+          </div>
+          <div
+            class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-1 my-2 text-center"
+          >
+            <button
+              class="btn btn-secondary p-1 px-3 m-1"
+              style="box-shadow: black 0px 1px 4px;"
+              (click)="cancelsearch()"
+            >
+              <i
+                class="fa fa-close"
+                style="color: red; padding: 0; margin: 0;"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <table
+        class="table table-striped table-hover table-bordered"
+        *ngIf="addlist"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Profile</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="stg"
+            *ngFor="let user of UserList  | paginate: {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index"
+          >
+            <td>
+              <div class="d-flex align-items-center justify-content-center">
+                <img
+                  src="http://127.0.0.1:5000/user/{{user.profile}}"
+                  alt=""
+                  style="width: 45px; height: 45px;"
+                  class="rounded-circle"
+                />
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{user.name}}</p>
+            </td>
+            <td>
+              <span class="d-inline">{{user.email}}</span>
+            </td>
+            <td>{{user.countryid.countrycode+user.number}}</td>
+            <td>
+
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="EditUser(user)"
+              >
+                <i
+                  class="fa fa-solid fa-pencil"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3 my-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="deleteUser(user)"
+              >
+                <i
+                  class="fa fa-solid fa-trash"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3 my-1"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="openDialog(user)"
+              >
+                <i
+                  class="fa fa-solid fa-credit-card"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="addlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+          Showing
+          <b>
+            <select
+              name="sort"
+              id="sort"
+              class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;"
+              (change)="onTableSizeChange($event)"
+              (change)="onTableDataChange($event)"
+            >
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b
+          >
+          out of <b>{{count}}</b> entries
+        </div>
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+      <table
+        class="table table-striped table-hover table-bordered"
+        *ngIf="searchlist"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Profile</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="stg"
+            *ngFor="let user of SearchUserList  | paginate: {
+            itemsPerPage: tableSize2,
+            currentPage: page2,
+            totalItems: count2
+          };
+    let i = index"
+          >
+            <td>
+              <div class="d-flex align-items-center justify-content-center">
+                <img
+                  src="http://127.0.0.1:5000/user/{{user.profile}}"
+                  alt=""
+                  style="width: 45px; height: 45px;"
+                  class="rounded-circle"
+                />
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{user.name}}</p>
+            </td>
+            <td>
+              <span class="d-inline">{{user.email}}</span>
+            </td>
+            <td>{{user.country.countrycode+user.number}}</td>
+            <td>
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="EditUser(user)"
+              >
+                <i
+                  class="fa fa-solid fa-pencil"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3 my-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="deleteUser(user)"
+              >
+                <i
+                  class="fa fa-solid fa-trash"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+              <button
+                type="button"
+                class="btn bg-light p-1 px-3 my-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{user._id}}"
+                (click)="openDialog(user)"
+              >
+                <i
+                  class="fa fa-solid fa-credit-card"
+                  style="color: black; padding: 0; margin: 0; font-size: 12px;"
+                ></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix p-1" *ngIf="searchlist">
+        <div class="hint-text m-1" style="font-size: 18px;">
+          Showing
+          <b>
+            <select
+              name="sort"
+              id="sort"
+              class="stg bg-light mx-1 px-1 my-1"
+              style="outline: 0; border: 0; box-shadow: lightblue 0px 1px 4px;"
+              (change)="onTableSizeChange2($event)"
+            >
+              <option value="2" selected>2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+            </select></b
+          >
+          out of <b>{{count2}}</b> entries
+        </div>
+        <div class="d-flex justify-content-end mb-5">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange2($event)"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+      <div *ngIf="nouser">
+        <p class="text-center">
+          No User Found
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+    "/api/*": {
+      "target": "https://restcountries.com/v3.1/all",
+      "pathRewrite":{
+        "^/api":""
+      },
+      "secure": false,
+      "changeOrigin": false,
+      "logLevel": "debug"
+    }
+  }
+  

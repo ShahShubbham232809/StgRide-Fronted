@@ -1,0 +1,89 @@
+.register {
+  color: black;
+  display: flex;
+  align-items: center;
+  margin: 50px auto;
+  justify-content: center;
+  flex-direction: column;
+  background-color: lightblue;
+  width: 50%;
+  opacity: 0.9;
+  border-radius: 20px;
+  padding: 20px;
+  border-bottom-left-radius: 35%;
+  border-top-right-radius: 35%;
+  box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5), inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+  border-left: 8px solid darkcyan;
+  border-right: 8px solid darkcyan;
+  border: 2px 2px 2px 2px 2px solid black;
+}
+.register .registername {
+  text-align: center;
+  margin-top: 30px;
+}
+.register input {
+  padding: 8px;
+  border: none;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.register input[type=submit] {
+  padding: 10px;
+  width: 60%;
+  border-radius: 5px;
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: bold;
+  color: darkslateblue;
+  margin: 0 auto;
+}
+.register input[type=file] {
+  padding: 5px 20px;
+  width: 45%;
+  background-color: white;
+}
+.register input:focus {
+  outline: none;
+}
+.register .registerform {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  text-align: justify;
+}
+.register .registerform div {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.register .registerform label {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 0 5px;
+  text-align: justify;
+}
+
+#phone {
+  width: 42%;
+  padding: 5px 20px;
+}
+
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button {
+  /* Hide the increment and decrement buttons */
+  -webkit-appearance: none;
+  display: none;
+}
+
+.body {
+  background-image: url("../../assets/bg5.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  color: red;
+  text-align: right;
+}/*# sourceMappingURL=signup.component.css.map */

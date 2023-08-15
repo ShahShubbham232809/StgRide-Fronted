@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rides {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.rides p, .rides a {
+  width: 70%;
+  margin: 10px auto;
+  color: whitesmoke;
+}
+.rides p:hover {
+  box-shadow: lightblue 0px 7px 29px 0px;
+  font-weight: bolder;
+}
+
+.sidebar {
+  min-height: 760px;
+  max-height: 1200px;
+  background-color: black;
+  max-height: 1500px;
+  margin-bottom: 60px;
+  padding-top: 20px;
+}
+.sidebar .menu {
+  color: whitesmoke;
+  font-weight: bold;
+}
+.sidebar .menu div {
+  width: 70%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar .menu img {
+  height: 40px;
+  width: 40px;
+}
+
+.stg2 {
+  justify-content: flex-start !important;
+}
+.stg2 img {
+  margin-right: 20px;
+}/*# sourceMappingURL=dashboard.component.css.map */

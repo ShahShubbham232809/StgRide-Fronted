@@ -1,0 +1,127 @@
+<div class="row m-3">
+    <div class="col-12 add">
+        <div class="field has-addons shadow">
+            <div class="control">
+              <input class="input" #search type="text" id="search" placeholder="Find a country....." >
+            </div>
+            <div class="control">
+              <button (click)="searchCountry(search.value)" class="btn btn-primary bt">
+                Search
+            </button>
+
+            </div>
+
+          </div>
+          <div>
+            <button class="btn btn-danger" (click)="cancel(search)">
+              cancel
+            </button>
+          </div>
+        <button type="button" class="button is-info is-rounded shadow" (click)="addCountry()">Add Country</button>
+    </div>
+    <div class="countrylist col-12" *ngIf="value">
+
+        <div class="field mx-auto my-4">
+            <p class="control has-icons-left">
+              <span class="select">
+                <select class="shadow"  #country (change)="add(country.value)" id="mySelect">
+                  <option disabled selected>Select Country</option>
+                  <option  *ngFor="let country of countries" [value]="country.name.common" class="bg-light"> {{country.name.common}}</option>
+                </select>
+              </span>
+              <span class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </span>
+            </p>
+          </div>
+          <div class="countrydetails">
+            <form [formGroup]="CreateCountry" class="formBuild" (submit)="createCon(this.CreateCountry.value)">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="text" formControlName="flag" placeholder="Flag" readonly id="flag">
+                <span class="icon is-small is-left">
+                  <i class="far fa-flag text-info"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field" hidden>
+              <p class="control has-icons-left">
+                <input class="input" type="text" formControlName="flagpath" placeholder="flagpath" readonly>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-globe text-success"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="text" formControlName="countryname" placeholder="CountryName" readonly>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-globe text-success"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <span *ngIf="CreateCountry.get('countryname')?.hasError('incorrect')" id="error" style="color: red;">Country is already exists</span>
+        </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="text" formControlName="countrytimezone" placeholder="CountryTimeZone" readonly>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-clock text-primary"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="text" formControlName="countrycode" placeholder="CountryCode" readonly>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="text" formControlName="currency" placeholder="Currency" readonly>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-coins text-warning"></i>
+                </span>
+              </p>
+            </div>
+            <div class="addB">
+              <button type="submit" class="btn btn-success mx-2">Add</button>
+              <button class="btn btn-danger mx-2" (click)="cancelcountry()">Cancel</button>
+          </div>
+            </form>
+          </div>
+    </div>
+
+    <div class="list col-12 my-3 p-3" *ngIf="normal">
+      <div class="carOne card p-3 my-3" *ngFor="let country of countryList">
+        <img src="{{country.flag}}" alt="" style="max-width:fit-content">
+        <p>{{country.countryname | titlecase}}</p>
+        <p>{{country.countrytimezone}}</p>
+        <p>{{country.countrycode}}</p>
+        <p>{{country.currency}}</p>
+        <!-- <p> -->
+            <!-- <button type="button" class="btn btn-success" id="{{car._id}}" (click)="EditCar($event.target)">Update</button> -->
+            <!-- <button type="button" class="btn btn-danger" id="{{country._id}}" (click)="deleteCountry($event.target)">Delete</button>
+        </p> -->
+    </div>
+    </div>
+    <div class="list col-12 my-3 p-3" *ngIf="search">
+      <div class="carOne card p-3 my-3" *ngFor="let country of searchCountryList">
+        <img src="{{country.flag}}" alt="">
+        <p>{{country.countryname | titlecase}}</p>
+        <p>{{country.countrytimezone}}</p>
+        <p>{{country.countrycode}}</p>
+        <p>{{country.currency}}</p>
+        <!-- <p> -->
+            <!-- <button type="button" class="btn btn-success" id="{{car._id}}" (click)="EditCar($event.target)">Update</button> -->
+            <!-- <button type="button" class="btn btn-danger" id="{{country._id}}" (click)="deleteCountry($event.target)">Delete</button> -->
+        <!-- </p> -->
+    </div>
+    </div>
+    <div class="list col-12 my-3 p-3 p-3" *ngIf="nofound">
+      <p>Country No Found!!!!</p>
+    </div>
+</div>

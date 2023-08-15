@@ -1,0 +1,53 @@
+<div class="maindash row" *ngIf="loggedin">
+  <div class="sidebar col-md-4 col-lg-3 col-xxl-2" *ngIf="navbar">
+    <aside class="menu">
+          <!-- <button  mat-raised-button color="primary">Action</button> -->
+          <div class="text-light btn btn-outline-primary btn-rounded" (click)="rotate()">
+            <img class="logo" src="../../assets/panel/icons8-car-rental-96.png" alt="">
+            <span class="icon-text">Rides</span>
+            <img src="../../assets/panel/icons8-down-button-100.png" class="drop" alt="" [@rotatedState]='state' >
+          </div>
+          <div class="rides" *ngIf="showRides">
+            <a routerLink="createride" class="btn btn-outline-primary btn-rounded"> Create Ride</a>
+            <a routerLink="/dashboard/confirmride" class="btn btn-outline-primary btn-rounded">Confirm Ride</a>
+            <a routerLink="/dashboard/history" class="btn btn-outline-primary btn-rounded">Ride History</a>
+          </div>
+          <div class="text-light btn btn-outline-primary btn-rounded stg2" routerLink="/dashboard/users">
+            <img class="logo" src="../../assets/panel/icons8-users-100.png"  alt="">
+            <span class="icon-text">Users</span>
+          </div>
+          <div class="text-light btn btn-outline-primary btn-rounded" (click)="rotate2()">
+            <img class="logo" src="../../assets/panel/icons8-driver-64.png" alt="">
+            <span class="icon-text">Drivers</span>
+            <img src="../../assets/panel/icons8-down-button-100.png" class="drop2" alt="" [@rotatedState2]='state' >
+          </div>
+          <div class="rides" *ngIf="showDriver">
+            <a routerLink="/dashboard/driverslist" class="btn btn-outline-primary btn-rounded">List</a>
+            <a routerLink="/dashboard/runningrequest" class="btn btn-outline-primary btn-rounded">Running Request</a>
+          </div>
+          <div class="text-light btn btn-outline-primary btn-rounded" (click)="rotate3()">
+            <img class="logo" src="../../assets/panel/icons8-expensive-price-80.png" alt="">
+            <span class="icon-text"> Pricing</span>
+            <img src="../../assets/panel/icons8-down-button-100.png" class="drop3" alt="" [@rotatedState3]='state'>
+          </div>
+          <div class="rides" *ngIf="showPrice">
+            <a routerLink="/dashboard/country" class="btn btn-outline-primary btn-rounded">Country</a>
+            <a routerLink="/dashboard/city" class="btn btn-outline-primary btn-rounded">City</a>
+            <a routerLink="/dashboard/vehicletype" class="btn btn-outline-primary btn-rounded">Vehicle Type</a>
+            <a routerLink="/dashboard/vehicleprice" class="btn btn-outline-primary btn-rounded">Vehicle Pricing</a>
+          </div>
+          <div class="text-light btn btn-outline-primary btn-rounded stg2"  routerLink="/dashboard/setting" >
+            <img class="logo" src="../../assets/panel/icons8-settings-100.png" alt="">
+            <span class="icon-text">  <a routerLink="/dashboard/setting" style="color: aliceblue;"> Settings</a></span>
+          </div>
+          </aside>
+        </div>
+
+      <div class="col-sm-12 col-md-8 col-lg-9 col-xxl-10" *ngIf="navbar">
+    <router-outlet></router-outlet>
+
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 mx-2" *ngIf="!navbar">
+      <router-outlet></router-outlet>
+      </div>
+    </div>

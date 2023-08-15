@@ -1,0 +1,36 @@
+  .custom-button{
+    height: 10px;
+    width: 10px;
+    background-color:light;
+  }
+.globebox{
+  box-shadow: black 0px 5px 15px;
+}
+::ng-deep .pagination-next,
+::ng-deep .pagination-previous {
+  border: 0;
+  padding: 2px;
+  // color: rebeccapurple;
+}
+::ng-deep .ngx-pagination .current,
+.btn-info {
+  // background:  !important;
+  padding: 4px;
+  border: transparent;
+  border-radius: 50%;
+  padding: 4px 8px !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+::ng-deep .ngx-pagination .current:hover {
+  background: blue !important;
+  border-radius: 50%;
+  border: transparent;
+}
+::ng-deep .ngx-pagination {
+  box-shadow: lightblue 0px 3px 8px;
+  border-radius: 10px;
+  padding: 0px;
+  margin: 0px auto;
+  padding-top: 6px;
+  // display: flex;
+}

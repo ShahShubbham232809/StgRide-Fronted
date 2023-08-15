@@ -1,0 +1,170 @@
+<!-- <div *ngIf="ride" class="mt-2 stg2">
+  <div class="table row table-responsive">
+    <table class="table align-middle mb-0 bg-white text-center mx-auto">
+      <thead class="bg-light">
+        <tr>
+          <th class="text-center">Request Id</th>
+          <th class="text-center">User Name</th>
+          <th class="text-center">Driver Name</th>
+          <th class="text-center">Start Location</th>
+          <th class="text-center">Drop Location</th>
+          <th class="text-center">Way Points</th>
+          <th class="text-center">Total Distance</th>
+          <th class="text-center">Total Time</th>
+          <th class="text-center">Servicetype</th>
+          <th class="text-center">Estimated Fare</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="stg" *ngFor="let ride of runningridelist">
+          <td>
+            {{ride._id}}
+          </td>
+          <td>{{ride.userId.name | titlecase}}</td>
+          <td>{{ride.driverID.name | titlecase}}</td>
+          <td>{{ride.startLocation}}</td>
+          <td>{{ride.endLocation}}</td>
+          <td>{{ride.wayPoints.length}}</td>
+          <td>{{ride.totalDistance}}Kms</td>
+          <td>{{ride.totalTime}}Hrs</td>
+          <td>
+            {{ride.serviceType | titlecase}}
+          </td>
+          <td>Rs. {{ride.estimateFare}}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-success btn-rounded m-2"
+              id="{{ride._id}}"
+              (click)="sendUserData(ride)"
+              style="margin: 0 auto;"
+            >
+              Accept Request
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-rounded m-2"
+              id="{{ride._id}}"
+              (click)="deleteRide(ride)"
+              style="margin: 0 auto;"
+            >
+              Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+<div *ngIf="nodriver" class="d-flex justify-content-center align-center my-5">
+  Currenty Not Rides Available......
+</div>
+<div class="container-fluid" style="margin-bottom: 100px;" *ngIf="ride">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <h2>
+              <i class="fa fa-solid fa-run mx-2" style="color: #2199e8;"></i
+              >Running Ride <b>Details</b>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <table
+        class="table table-striped table-hover table-bordered"
+        *ngIf="ride"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">Request Id</th>
+            <th class="text-center">User Name</th>
+            <th class="text-center">Driver Name</th>
+            <th class="text-center">Start Location</th>
+            <th class="text-center">Drop Location</th>
+            <th class="text-center">Way Points</th>
+            <th class="text-center">Total Distance</th>
+            <th class="text-center">Total Time</th>
+            <th class="text-center">Servicetype</th>
+            <th class="text-center">Estimated Fare</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stg" *ngFor="let ride of runningridelist">
+            <td>
+              {{ride._id}}
+            </td>
+            <td>{{ride.userId.name | titlecase}}</td>
+            <td>{{ride.driverID.name | titlecase}}</td>
+            <td>{{ride.startLocation}}</td>
+            <td>{{ride.endLocation}}</td>
+            <td>{{ride.wayPoints.length}}</td>
+            <td>{{ride.totalDistance}}Kms</td>
+            <td>{{ride.totalTime / 60 | number: '1.0-0' }}Hrs {{ride.totalTime % 60 | number: '1.0-0'}}Mins</td>
+            <td>
+              {{ride.serviceType | titlecase}}
+            </td>
+            <td>{{ride.estimateFare  | currency:'INR'}}</td>
+            <td>
+              <div *ngIf="ride.Status == 1">
+              <button
+                class="btn bg-light p-1 px-3 m-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{ride._id}}"
+                (click)="sendUserData(ride)"
+              >
+               Accept
+              </button>
+            </div>
+            <div *ngIf="ride.Status == 4">
+              <button
+                class="btn bg-light p-1 px-3 m-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{ride._id}}"
+                (click)="StatusUpdater(ride)"
+              >
+               Arrived
+              </button>
+            </div>
+            <div *ngIf="ride.Status == 5">
+              <button
+                class="btn bg-light p-1 px-3 m-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{ride._id}}"
+                (click)="StatusUpdater(ride)"
+              >
+               Started
+              </button>
+            </div>
+            <div *ngIf="ride.Status == 6">
+              <button
+                class="btn bg-light p-1 px-3 m-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{ride._id}}"
+                (click)="StatusUpdater(ride)"
+              >
+               Completed
+              </button>
+            </div>
+              <button
+                class="btn bg-light p-1 px-3 m-2"
+                style="box-shadow: lightblue 0px 1px 4px;"
+                id="{{ride._id}}"
+                (click)="deleteRide(ride)"
+                *ngIf="ride.Status == 1"
+              >
+                Reject
+              </button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

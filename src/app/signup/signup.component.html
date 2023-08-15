@@ -1,0 +1,74 @@
+<div class="body">
+  <div class="register">
+    <div class="registername">
+      <h1 id="registername">Registration</h1>
+    </div>
+    <div class="registerform">
+      <form id="newuser" [formGroup]="createuser" (submit)="create(this.createuser.value)">
+        <div>
+          <label for="file">Profile Picture</label>
+          <input type="file" formControlName="profile" id="profilepic" (change)="inputProfile($event)" accept="image/png, image/jpg, image/jpeg">
+        </div>
+
+        <div>
+          <label for="fname">First name</label>
+          <input type="text" id="fname" formControlName="firstname" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+        </div>
+          <div class="field" *ngIf="createuser.get('firstname')?.invalid && (createuser.get('firstname')?.dirty || createuser.get('firstname')?.touched)">
+            <span *ngIf="createuser.get('firstname')?.hasError('required')">First name is required</span>
+            <span *ngIf="createuser.get('firstname')?.hasError('minlength')">First name must be at least 4 characters long</span>
+          </div>
+
+        <div>
+          <label for="lname" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">Last name</label>
+          <input type="text" id="lname" formControlName="lastname">
+        </div>
+          <div class="field" *ngIf="createuser.get('lastname')?.invalid && (createuser.get('lastname')?.dirty || createuser.get('lastname')?.touched)">
+            <span *ngIf="createuser.get('lastname')?.hasError('required')">Last name is required</span>
+            <span *ngIf="createuser.get('lastname')?.hasError('minlength')">Last name must be at least 4 characters long</span>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email">
+        </div>
+          <div class="field" *ngIf="createuser.get('email')?.invalid && (createuser.get('email')?.dirty || createuser.get('email')?.touched)">
+            <span *ngIf="createuser.get('email')?.hasError('required')">Email is required</span>
+            <span *ngIf="createuser.get('email')?.hasError('pattern')">Email format is invalid</span>
+            <span *ngIf="createuser.get('email')?.hasError('incorrect')">Email is already Exists</span>
+        </div>
+
+        <div>
+          <label for="pwd">Password</label>
+          <input type="password" id="pwd" formControlName="password">
+        </div>
+          <div class="field" *ngIf="createuser.get('password')?.invalid && (createuser.get('password')?.dirty || createuser.get('password')?.touched)">
+            <span *ngIf="createuser.get('password')?.hasError('required')">Password is required</span>
+            <span *ngIf="createuser.get('password')?.hasError('minlength')">Password must be at least 8 characters long</span>
+        </div>
+
+
+
+    <div><label for="phone">Number:</label>
+     <input class="no-spin" type="text" id="phone" formControlName="number"  minlength="10" maxlength="10" input (keypress)="keyPress($event)">
+    </div>
+    <div class="field" *ngIf="createuser.get('number')?.invalid && (createuser.get('number')?.dirty || createuser.get('number')?.touched)">
+      <span *ngIf="createuser.get('number')?.hasError('required')">Number is required</span>
+      <span *ngIf="createuser.get('number')?.hasError('minlength')">Number is must be 10 digit</span>
+      <span *ngIf="createuser.get('number')?.hasError('incorrect')">Number is already exists</span>
+      </div>
+
+
+    <div>
+      <input type="submit" value="Register" id="create" >
+    </div>
+
+    <p class="status" style="color: aliceblue;">
+
+    </p>
+      <p class="common" style="color: aliceblue;"></p>
+
+ </form>
+ </div>
+</div>
+</div>

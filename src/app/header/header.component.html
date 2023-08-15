@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg bg-dark bg-gradient">
+  <div class="logo col-sm-3 col-md-6 col-lg-4 col-xl-4 d-flex">
+    <div class="h1 text-white align-center mx-2 mt-2" *ngIf="loggedin" (click)="nav(this.navbar = !this.navbar)">
+      <i class="fas fa-bars"></i>
+      </div>
+    <img src="../../assets/logo/logo-no-background.svg" style="height: 60px;margin: auto 30px;">
+  </div>
+  <div class="buttonslink col-sm-9 col-md-6 col-lg-8 col-xl-8 col-xxl-8  d-flex justify-content-end">
+    <div class="buttons my-2" *ngIf="notLoggedIn">
+      <a class="text-light btn btn-outline-primary btn-rounded" routerLink="/home">
+        <strong>Home</strong>
+      </a>
+      <a class="text-light btn btn-outline-primary btn-rounded" routerLink="/signup">
+        <strong>Sign up</strong>
+      </a>
+      <a class="text-light btn btn-outline-primary btn-rounded" routerLink="/login">
+        <strong>Log in</strong>
+      </a>
+    </div>
+    <div class="buttons my-2" *ngIf="loggedin" (click)="logout()">
+      <a class="text-light btn btn-outline-primary btn-rounded" routerLink="/logout">
+        <strong>LogOut</strong>
+      </a>
+    </div>
+    <div class="my-2 mr-4" *ngIf="loggedin">
+      <button type="button" class="icon-button" (click)="routenotification()">
+        <span class="material-icons">notifications</span>
+        <span class="icon-button__badge">{{count}}</span>
+      </button>
+    </div>
+  </div>
+</nav>
