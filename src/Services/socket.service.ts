@@ -8,7 +8,7 @@ import { NavigateService } from './navigate.service';
   })
   export class SocketService {
     private socket !: Socket;
-    private url = 'http://localhost:5000/';
+    private url = 'https://stgride.onrender.com/';
     update: any;
     constructor(
       private navigate:NavigateService

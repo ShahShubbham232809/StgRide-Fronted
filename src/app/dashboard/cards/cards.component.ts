@@ -196,7 +196,7 @@ export class CardsComponent implements OnInit {
     if (this.data.customerid.customerid != null) {
       if (this.cardlist) {
         this.http
-          .get(`http://localhost:5000/userslist/get-customer/${this.data.id}`)
+          .get(`https://stgride.onrender.com/userslist/get-customer/${this.data.id}`)
           .subscribe(
             (data) => {
               console.log(data);
@@ -211,7 +211,7 @@ export class CardsComponent implements OnInit {
           );
 
       this.http
-        .get(`http://localhost:5000/userslist/get-card/${this.id}`)
+        .get(`https://stgride.onrender.com/userslist/get-card/${this.id}`)
         .subscribe(
           (data) => {
             console.log(data);
@@ -239,10 +239,10 @@ export class CardsComponent implements OnInit {
 
     // Create the SetupIntent and obtain clientSecret
     const res = await fetch(
-      `http://localhost:5000/userslist/create-intent/${val}`,
+      `https://stgride.onrender.com/userslist/create-intent/${val}`,
       {
         method: "POST",
-        
+
       }
     );
 
@@ -275,7 +275,7 @@ export class CardsComponent implements OnInit {
     const deletecard = confirm("Are You Want To Delete Card????");
     if (deletecard) {
       this.http
-        .get(`http://localhost:5000/userslist/delete-card/${val}`)
+        .get(`https://stgride.onrender.com/userslist/delete-card/${val}`)
         .subscribe(
           (data) => {
             // Handle the retrieved data
@@ -291,7 +291,7 @@ export class CardsComponent implements OnInit {
   }
   async SetDefault(val: any, cardid: any) {
     this.http
-      .patch(`http://localhost:5000/userslist/default-card/${val}`, { cardid })
+      .patch(`https://stgride.onrender.com/userslist/default-card/${val}`, { cardid })
       .subscribe(
         (data) => {
           // Handle the retrieved data

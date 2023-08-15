@@ -8,13 +8,13 @@ import { io, Socket } from 'socket.io-client';
 export class DriverService {
   // countryCallingCodes : any
   private socket !: Socket;
-  private url = 'http://localhost:5000/';
+  private url = 'https://stgride.onrender.com/';
 
   constructor(private http:HttpClient) {
     this.socket = io(this.url);
    }
   apiUrl = 'https://restcountries.com/v3.1/all'
-  apiUrl2 = 'http://localhost:5000/driverslist/'
+  apiUrl2 = 'https://stgride.onrender.com/driverslist/'
   getCountryList(){
     return this.http.get(this.apiUrl)
   }

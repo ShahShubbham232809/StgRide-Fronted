@@ -9,7 +9,7 @@ export class UserService {
   // countryCallingCodes : any
   constructor(private http: HttpClient) {}
   apiUrl = "https://restcountries.com/v3.1/all";
-  apiUrl2 = "http://localhost:5000/userslist/";
+  apiUrl2 = "https://stgride.onrender.com/userslist/";
 
   getCountryList() {
     return this.http.get(this.apiUrl);

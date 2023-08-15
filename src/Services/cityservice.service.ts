@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class CityserviceService {
 
 
-  apiUrl = 'http://localhost:5000/cities/'
+  apiUrl = 'https://stgride.onrender.com/cities/'
   apiUrl2 = 'https://restcountries.com/v3.1/name/'
   constructor(private http:HttpClient) { }
   getCityList(){

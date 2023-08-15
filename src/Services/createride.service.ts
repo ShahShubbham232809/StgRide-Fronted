@@ -7,8 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreaterideService implements OnInit{
   createUserRide!: FormGroup;
-  apiUrl = 'http://localhost:5000/userslist/';
-  apiUrl2 = 'http://localhost:5000/createride/'
+  apiUrl = 'https://stgride.onrender.com/userslist/';
+  apiUrl2 = 'https://stgride.onrender.com/createride/'
   constructor(private http: HttpClient, private fb: FormBuilder) {}
   ngOnInit(){
 

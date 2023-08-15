@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class CountriesService {
 
- 
+
   apiUrl = 'https://restcountries.com/v3.1/all?fields=name'
   apiUrl2 = 'https://restcountries.com/v3.1/name/'
-  apiUrl3 = 'http://localhost:5000/countries/'
-  constructor(private http:HttpClient) { 
+  apiUrl3 = 'https://stgride.onrender.com/countries/'
+  constructor(private http:HttpClient) {
 
   }
   getCountryList(){

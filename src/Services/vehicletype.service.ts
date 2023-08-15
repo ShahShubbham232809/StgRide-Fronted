@@ -8,8 +8,8 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class VehicletypeService {
 
-  apiUrl = 'http://localhost:5000/car/'
-  constructor(private http:HttpClient) { 
+  apiUrl = 'https://stgride.onrender.com/car/'
+  constructor(private http:HttpClient) {
 
   }
   getCarList(){

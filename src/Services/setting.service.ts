@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class SettingService {
 
-  apiUrl = 'http://localhost:5000/settings/list'
+  apiUrl = 'https://stgride.onrender.com/settings/list'
   constructor(private http:HttpClient) {
 
   }

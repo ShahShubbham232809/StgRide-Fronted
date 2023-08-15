@@ -7,9 +7,9 @@ import { Injectable } from '@angular/core';
 export class CarpriceService {
 
 
-  apiUrl = 'http://localhost:5000/vehicleprice/'
-  apiUrl2 = 'http://localhost:5000/countries/'
-  apiUrl3 = 'http://localhost:5000/cities/'
+  apiUrl = 'https://stgride.onrender.com/vehicleprice/'
+  apiUrl2 = 'https://stgride.onrender.com/countries/'
+  apiUrl3 = 'https://stgride.onrender.com/cities/'
 
   constructor(private http:HttpClient) {
 

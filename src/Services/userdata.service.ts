@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserdataService {
   value = false;
   logoutuser:any
-  apiUrl = 'http://localhost:5000/';
+  apiUrl = 'https://stgride.onrender.com/';
   constructor(private http: HttpClient, private cookie: CookieService) {}
   login(UserData: any) {
     return this.http.post(this.apiUrl + 'login', UserData);
