@@ -36,7 +36,7 @@ import { CreaterideService } from "src/Services/createride.service";
         <label class="label">User Details :</label>
         <div class="d-flex justify-content-center">
           <img
-            src="http://127.0.0.1:5000/user/{{ details.userId.profile }}"
+            src="https://stgride.onrender.com/user/{{ details.userId.profile }}"
             alt=""
             style="width: 45px; height: 45px;"
             class="rounded-circle m-auto"
@@ -49,7 +49,7 @@ import { CreaterideService } from "src/Services/createride.service";
           <label class="label">Driver Details :</label>
           <div class="d-flex justify-content-center">
             <img
-              src="http://127.0.0.1:5000/driver/{{ details.driverID.profile }}"
+              src="https://stgride.onrender.com/driver/{{ details.driverID.profile }}"
               alt=""
               style="width: 45px; height: 45px;"
               class="rounded-circle m-auto"

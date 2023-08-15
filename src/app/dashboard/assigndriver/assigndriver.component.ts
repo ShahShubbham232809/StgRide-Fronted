@@ -39,7 +39,7 @@ import { Subscription } from "rxjs";
                 <td>
                   <div class="d-flex align-items-center justify-content-center">
                     <img
-                      src="http://127.0.0.1:5000/driver/{{ driver.profile }}"
+                      src="https://stgride.onrender.com/driver/{{ driver.profile }}"
                       alt=""
                       style="width: 45px; height: 45px;"
                       class="rounded-circle"
