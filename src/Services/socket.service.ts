@@ -1,5 +1,5 @@
   import { Injectable } from '@angular/core';
-import { data } from 'jquery';
+
   import { Observable,fromEvent } from 'rxjs';
   import { io, Socket } from 'socket.io-client';
 import { NavigateService } from './navigate.service';

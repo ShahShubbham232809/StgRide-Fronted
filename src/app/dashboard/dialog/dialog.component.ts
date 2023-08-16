@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { event } from "jquery";
+
 import { VehicletypeService } from "src/Services/vehicletype.service";
 import { VehiclepriceComponent } from "../pricing/vehicleprice/vehicleprice.component";
 
@@ -81,7 +81,7 @@ export class DialogComponent implements OnInit {
   }
   ngOnInit() {
     this.vehiclelist();
-  
+
   }
   constructor(
     private cartype: VehicletypeService,

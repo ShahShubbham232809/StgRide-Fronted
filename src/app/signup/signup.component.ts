@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { error } from 'jquery';
+
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";

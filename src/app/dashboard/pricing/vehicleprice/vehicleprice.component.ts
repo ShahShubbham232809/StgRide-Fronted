@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { event } from "jquery";
+
 import { ToastrService } from "ngx-toastr";
 import { CarpriceService } from "src/Services/carprice.service";
 import { CityserviceService } from "src/Services/cityservice.service";

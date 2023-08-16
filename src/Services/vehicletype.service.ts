@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { error } from 'jquery';
+
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
