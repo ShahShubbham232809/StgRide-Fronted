@@ -1,5 +1,4 @@
 import { Router } from "@angular/router";
-import { error } from "jquery";
 import { HttpErrorResponse } from "@angular/common/http";
 import {
   Component,
