@@ -12,8 +12,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
 import { SocketService } from "src/Services/socket.service";
 import { NavigateService } from "src/Services/navigate.service";
-import { Router } from "@angular/router";
-import { ObjectId } from "mongodb";
+
 import { Subscription } from "rxjs";
 @Component({
   selector: "app-assigndriver",
@@ -186,7 +185,7 @@ export class AssigndriverComponent implements OnInit, OnDestroy {
           );
         });
         ids = await this.driverid.map((driver: any) => {
-          return driver._id as ObjectId;
+          return driver._id ;
         });
       });
     }
