@@ -1,7 +1,0 @@
-[build]
-  publish = "dist/StgRide"
-  command = "ng build"
-[[redirects]]
-  from = "/*"
-  to = "src/index.html"
-  status = 200
